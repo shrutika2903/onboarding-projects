@@ -1,9 +1,8 @@
 import { useState } from "react";
-import AccordionData from "./AccordionData";
-import { Accordion } from './AccordionType';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Button } from "@mui/material";
+import { Wrapper } from "./App.styles";
 
 interface AccordionProps {
     id: number;
@@ -16,16 +15,17 @@ function Question(props: AccordionProps) {
     const [showInfo, setShowInfo] = useState(false);
 
     return (
-        <div className="question">
-            <header>
-                <h1>{title}</h1>
-                <Button className="btn" onClick={() => setShowInfo(!showInfo)}>
-                    {showInfo ? <RemoveIcon /> : <AddIcon />}
-                </Button>
-            </header>
-            {showInfo && <p>{info}</p>}
-        </div>
-
+        <Wrapper>
+            <div className="question">
+                <header>
+                    <h4>{title}</h4>
+                    <Button className="btn" onClick={() => setShowInfo(!showInfo)}>
+                        {showInfo ? <RemoveIcon /> : <AddIcon />}
+                    </Button>
+                </header>
+                {showInfo && <p>{info}</p>}
+            </div>
+        </Wrapper>
     )
 
 }
