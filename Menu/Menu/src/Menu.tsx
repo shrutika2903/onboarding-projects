@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import MenuData from "./Data";
 
-// interface MenuProps {
-//     id: number;
-//     title: string;
-//     category: string;
-//     price: number;
-//     img: string;
-//     desc: string;
-// }
-function Menu() {
-    const [items, setItems] = useState(MenuData);
+interface MenuProps {
+    id: number;
+    title: string;
+    category: string;
+    price: number;
+    img: string;
+    desc: string;
+}
+function Menu(props: MenuProps) {
+    const [items, setItems] = useState<MenuProps[]>(MenuData);
+    
     return (
         <div className='section-center'>
             {
