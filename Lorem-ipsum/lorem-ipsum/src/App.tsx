@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import text from './Data';
-import './App.css'
+import './App.css';
+import { Wrapper } from './App.style'
 
 
 
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <>
+    <Wrapper>
       <section className='section-center'>
         <h3>tired of boring lorem ipsum?</h3>
         <form className='lorem-form' onSubmit={handleSubmit}>
@@ -47,6 +49,7 @@ function App() {
         })}
         </article>
       </section>
+      </Wrapper>
     </>
   )
 }
