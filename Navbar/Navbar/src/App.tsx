@@ -1,65 +1,68 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, ReactElement } from 'react';
+import { MenuItem } from '@mui/material';
 import { links, social } from './Data';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Button } from '@mui/material';
-import './App.css'
+import logo from './logo.svg';
 
-function App() {
-  const [showLinks, setShowLinks] = useState(false);
-  const linksContainerRef = useRef<HTMLInputElement>(null);
-  const linksRef = React.useRef<HTMLInputElement>(null);
-  
+interface Link {
+  id: number;
+  url: string;
+  text: string;
+}
+
+interface SocialIcon {
+  id: number;
+  url: string;
+  icon: ReactElement;
+}
+
+const Navbar: React.FC = () => {
+  const [showLinks, setShowLinks] = useState<boolean>(false);
+  const linksContainerRef = useRef<HTMLDivElement | null>(null);
+  const linksRef = useRef<HTMLUListElement | null>(null);
+
   const toggleLinks = () => {
-    setShowLinks(!showLinks); 
+    setShowLinks(!showLinks);
   };
 
-  const linkStyles = {
-    height: showLinks && linksRef.current
-      ? `${linksRef.current.getBoundingClientRect().height}px`
-      : '0px',
-  };
-
+  useEffect(() => {
+    if (linksRef.current && linksContainerRef.current) {
+      const linksHeight = linksRef.current.getBoundingClientRect().height;
+      if (showLinks) {
+        linksContainerRef.current.style.height = `${linksHeight}px`;
+      } else {
+        linksContainerRef.current.style.height = '0px';
+      }
+    }
+  }, [showLinks]);
 
   return (
-  <>
-     <nav>
+    <nav>
       <div className='nav-center'>
         <div className='nav-header'>
-          {/* <img src={logo} className='logo' alt='logo' /> */}
-          <Button className='nav-toggle' onClick={toggleLinks}>
-           <MenuIcon />
-          </Button>
+          <img src={logo} className='logo' alt='logo' />
+          <button className='nav-toggle' onClick={toggleLinks}>
+            <MenuItem />
+          </button>
         </div>
-        <div
-          className='links-container'
-          ref={linksContainerRef}
-          style={linkStyles}
-        >
-       <ul className='links' ref={linksRef}>
-            {links.map((link) => {
-              const { id, url, text } = link;
-              return (
-                <li key={id}>
-                  <a href={url}>{text}</a>
-                </li>
-              );
-            })}
+        <div className='links-container' ref={linksContainerRef}>
+          <ul className='links' ref={linksRef}>
+            {links.map((link: Link) => (
+              <li key={link.id}>
+                <a href={link.url}>{link.text}</a>
+              </li>
+            ))}
           </ul>
         </div>
         <ul className='social-icons'>
-          {social.map((socialIcon) => {
-            const { id, url, icon } = socialIcon;
-            return (
-              <li key={id}>
-                <a href={url}>{icon}</a>
-              </li>
-            );
-          })}
+          {social.map((socialIcon: SocialIcon) => (
+            <li key={socialIcon.id}>
+              <a href={socialIcon.url}>{socialIcon.icon}</a>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>
-  </>
-  )
-}
+  );
+};
 
-export default App
+export default Navbar;
