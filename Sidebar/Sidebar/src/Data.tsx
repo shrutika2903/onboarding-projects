@@ -21,7 +21,24 @@ export const links = [
       text: 'team',
       icon: <GroupIcon />,
     },
- 
+    {
+        id: 3,
+        url: '/projects',
+        text: 'project',
+        icon: <FolderCopyIcon />,
+      },
+      {
+        id: 4,
+        url: '/calendar',
+        text: 'calendar',
+        icon: <CalendarMonthIcon />,
+      },
+      {
+        id: 5,
+        url: '/document',
+        text: 'document',
+        icon: <ArticleIcon />,
+      },
 ];
 
 export const social = [
