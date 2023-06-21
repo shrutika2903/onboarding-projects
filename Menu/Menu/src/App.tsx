@@ -1,40 +1,44 @@
-import { useState } from 'react'
-import './App.css'
-import { MenuType } from './MenuType';
+import React, { useState } from 'react';
 import Menu from './Menu';
-import MenuData from './Data';
 import Categories from './Categories';
-const allCategories = ['all', ...new Set(MenuData.map((item) => item.category))];
+import items from './Data';
 
-function App() {
-  const [menuItems, setMenuItems] = useState(MenuData);
-  const [categories, setCategories] = useState(allCategories);
-  const [items, setItems] = useState<MenuType[]>([]);
+interface MenuItem {
+  id: number;
+  title: string;
+  category: string;
+  price: number;
+  img: string;
+  desc: string;
+}
 
+const allCategories: string[] = ['all', ...new Set(items.map((item: MenuItem) => item.category))];
 
-  const filterItems = (category: string) => {
+const App: React.FC = () => {
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(items);
+  const [categories, setCategories] = useState<string[]>(allCategories);
+
+  const filterItems = (category: string): void => {
     if (category === 'all') {
-      setMenuItems(MenuData);
+      setMenuItems(items);
       return;
     }
-    const newItems = MenuData.filter((item) => item.category === category);
+    const newItems = items.filter((item: MenuItem) => item.category === category);
     setMenuItems(newItems);
   };
 
   return (
-   <>
     <main>
       <section className="menu section">
         <div className="title">
           <h2>our menu</h2>
           <div className="underline"></div>
         </div>
-        <Categories items={items} />
-        {/* <Menu MenuData={menuItems} /> */}
-        {/* <Menu /> */}
+        <Categories categories={categories} filterItems={filterItems} />
+        <Menu items={menuItems} />
       </section>
-    </main>   </>
-  )
-}
+    </main>
+  );
+};
 
-export default App
+export default App;

@@ -1,23 +1,27 @@
-import React, {useState} from "react";
-import { Button } from "@mui/material";
-import { MenuType } from "./MenuType";
-import MenuData from "./Data";
+import React from 'react';
 
-interface MenuProps {
-    menuItems: MenuType[];
-    // filterItems: (category: string) => void;
+interface CategoriesProps {
+  categories: string[];
+  filterItems: (category: string) => void;
 }
 
-function Categories() {
-    const [items, setItems] = useState<MenuProps[]>(MenuData);
-
-    
-    console.log('MenuItems', menuItems)
-    return (
-        <div>
-
-        </div>
-    )
-}
+const Categories: React.FC<CategoriesProps> = ({ categories, filterItems }) => {
+  return (
+    <div className="btn-container">
+      {categories.map((category, index) => {
+        return (
+          <button
+            type="button"
+            className="filter-btn"
+            key={index}
+            onClick={() => filterItems(category)}
+          >
+            {category}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
 
 export default Categories;
