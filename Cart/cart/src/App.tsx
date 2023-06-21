@@ -18,11 +18,11 @@ function App(): JSX.Element {
   // }
 
   return (
-<AppProvider>
-<Navbar />
+    <AppProvider>
+      <Navbar />
       <CartContainer />
-</AppProvider>
-   
+    </AppProvider>
+
   );
 }
 
