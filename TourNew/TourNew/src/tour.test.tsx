@@ -20,10 +20,14 @@ describe('Tour component', () => {
   test('renders tour details correctly', () => {
     const tourNameElement = screen.getByText('Tour Name');
     const tourPriceElement = screen.getByText('$ 100');
+    const tourInfoElement = screen.getByText('Tour info...');
+    const tourImageElement = screen.getByRole('img');
     const readMoreButton = screen.getByText('Read More');
 
     expect(tourNameElement).toBeInTheDocument();
     expect(tourPriceElement).toBeInTheDocument();
+    expect(tourInfoElement).toBeInTheDocument();
+    expect(tourImageElement).toHaveAttribute('src', 'tour-image.jpg')
     expect(readMoreButton).toBeInTheDocument();
   });
 
@@ -37,7 +41,6 @@ describe('Tour component', () => {
   });
 
   test('Expand tour info when "Read More" is clicked', () => {
-    
     const fullInfo = true;
     expect(fullInfo).toBe(true);
     const readMoreButton = screen.getByText('Read More');
@@ -46,7 +49,7 @@ describe('Tour component', () => {
     expect(readMoreButton.textContent).toBe('Show less');
   });
 
-test('calls removeTours function when "Not Interested" button is clicked', () => {
+  test('calls removeTours function when "Not Interested" button is clicked', () => {
     const notInterestedButton = screen.getByText('Not Interested');
 
     fireEvent.click(notInterestedButton);
