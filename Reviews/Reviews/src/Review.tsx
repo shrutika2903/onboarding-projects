@@ -3,7 +3,6 @@ import ReviewsData from './ReviewData'
 import { Button } from '@mui/material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Card from '@mui/material/Card/Card';
 import { Wrapper } from './App.style';
 
 function Review() {
@@ -41,7 +40,6 @@ const randomPerson = () => {
   return (
   <>
   <Wrapper>
-  <Card>
  
      <img src={image} alt={name} />
   
@@ -59,7 +57,6 @@ const randomPerson = () => {
 
 <Button className='random-btn'
 onClick={randomPerson}>Surprise Me</Button>
-</Card>
 </Wrapper>
   </>
   )
